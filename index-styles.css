@@ -11,7 +11,7 @@ body {
     /* Combine linear gradient for readability with the user's specific background image */
     background-image: 
         linear-gradient(to bottom, rgba(5,5,5,0.9) 0%, rgba(10,5,15,0.4) 40%, rgba(10,5,15,0.4) 60%, rgba(5,5,5,0.95) 100%),
-        url('MediaFolder\\NenEchoesThumbnailUpscaled.png');
+        url('MediaFolder/NenEchoesThumbnailUpscaled.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
