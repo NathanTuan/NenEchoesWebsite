@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEN ECHOES | Features</title>
+    
+    <!-- Added Tailwind and Fonts for the new Navigation -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="features-styles.css">
+</head>
+<body class="min-h-screen relative flex flex-col">
+
+    <!-- Updated Navigation Bar (Matching index.html) -->
+    <header class="w-full px-6 py-6 lg:px-12 flex items-center justify-between z-50 relative top-0 border-b border-white/5 bg-black/20 backdrop-blur-sm">
+        
+        <!-- Left: Logo -->
+        <a href="index.html" class="flex items-center gap-2 group">
+            <span class="font-cinzel text-xl md:text-2xl font-semibold tracking-wider text-white text-glow transition-all duration-300 group-hover:text-red-200">
+                NEN ECHOES
+            </span>
+        </a>
+
+        <!-- Center: Nav Links (Hidden on small screens) -->
+        <nav class="hidden md:flex items-center gap-10">
+            <a href="index.html" class="text-xs uppercase tracking-[0.2em] text-gray-400 hover:text-white transition-colors duration-300 relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-all hover:after:w-full animate-fade-up delay-1">HOME</a>
+            
+            <!-- Features is set to "Active" visually (text-white and after:w-full) -->
+            <a href="features.html" class="text-xs uppercase tracking-[0.2em] text-white transition-colors duration-300 relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[1px] after:bg-white after:transition-all animate-fade-up delay-2">FEATURES</a>
+            
+            <a href="#" class="text-xs uppercase tracking-[0.2em] text-gray-400 hover:text-white transition-colors duration-300 relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-all hover:after:w-full animate-fade-up delay-3">MEDIA</a>
+            <a href="#" class="text-xs uppercase tracking-[0.2em] text-gray-400 hover:text-white transition-colors duration-300 relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-all hover:after:w-full animate-fade-up delay-4">COMMUNITY</a>
+        </nav>
+
+        <!-- Right: CTA Button -->
+        <a href="#" class="hidden sm:inline-flex items-center justify-center px-6 py-2 rounded-full bg-[#1f0505] border border-red-500/50 text-red-100 text-xs uppercase tracking-widest hover:border-red-400 box-glow transition-all">
+            Play Now <span class="ml-2">&rarr;</span>
+        </a>
+        
+        <!-- Mobile Menu Icon -->
+        <button class="md:hidden text-gray-300 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </button>
+    </header>
+
+    <!-- Main Features Section -->
+    <main class="features-section flex-grow">
+        <div class="section-header">
+            <span class="subtitle">Combat &bull; Nen &bull; GUI</span>
+            <h1 class="title font-cinzel">Abilities & Mechanics</h1>
+            <p class="description animate-fade-down delay-1">Explore the intricate combat systems and Nen abilities forged within the world of Echoes.</p>
+        </div>
+
+        <div class="cards-grid">
+            <!-- Feature Card 1 -->
+            <div class="feature-card">
+                <div class="video-wrapper">
+                    <video controls muted loop>
+                        <source src="MediaFolder/KilluaThunderbolt.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-placeholder-text">Video Upload Area</div>
+                </div>
+                <div class="card-info">
+                    <h2 class="font-cinzel">Killua's Thunderbolt</h2>
+                    <p>Channel raw electrical aura to strike down opponents from above. The script involves custom vfx generation, character state management, physics-based processes, and much more.</p>
+                    <div class="tools-used">
+                        <span class="badge">Luau</span>
+                        <span class="badge">Raycasting</span>
+                        <span class="badge">ParticleEmitters</span>
+                        <span class="badge">AnimationController</span>
+                        <span class="badge">VFX</span>
+                        <span class="badge">SFX</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Card 2 -->
+            <div class="feature-card">
+                <div class="video-wrapper">
+                    <video controls muted loop>
+                        <source src="MediaFolder/GonRock.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-placeholder-text">Video Upload Area</div>
+                </div>
+                <div class="card-info">
+                    <h2 class="font-cinzel">Jajanken: Rock</h2>
+                    <p>A devastating close-range strike requiring a brief charge-up. Features custom animation blending, hit-box detection algorithms for precise impacts, and progressive aura glowing effects based on charge duration.</p>
+                    <div class="tools-used">
+                        <span class="badge">Luau</span>
+                        <span class="badge">AnimationController</span>
+                        <span class="badge">Spatial Query</span>
+                        <span class="badge">Ragdoll Physics</span>
+                        <span class="badge">VFX</span>
+                        <span class="badge">SFX</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feature Card 3 -->
+            <div class="feature-card">
+                <div class="video-wrapper">
+                    <video controls muted loop>
+                        <source src="MediaFolder/KiteGamble.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-placeholder-text">Video Upload Area</div>
+                </div>
+                <div class="card-info">
+                    <h2 class="font-cinzel">Kite's Gamble</h2>
+                    <p>A high-risk, high-reward ability that gambles for a random weapon (and its abilities). Utilizes random number generation, probability distributions, and visual feedback systems to create an engaging and unpredictable gameplay experience.</p>
+                    <div class="tools-used">
+                        <span class="badge">Luau</span>
+                        <span class="badge">Motor6D</span>
+                        <span class="badge">Animation Controller</span>
+                        <span class="badge">Random Number Generation</span>
+                        <span class="badge">VFX</span>
+                        <span class="badge">SFX</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Card 4 -->
+            <div class="feature-card">
+                <div class="video-wrapper">
+                    <video controls muted loop>
+                        <source src="MediaFolder/Ocean.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-placeholder-text">Video Upload Area</div>
+                </div>
+                <div class="card-info">
+                    <h2 class="font-cinzel">Ocean Waves</h2>
+                    <p>Forget the lifeless, static flat planes used in almost every other Roblox game. This is a next-gen, fully dynamic ocean system that actually breathes. By pushing the engine to its limits with complex Gerstner wave mathematics, custom bone data architecture, and cutting-edge shaders, it generates a relentlessly realistic, rolling sea you won't find anywhere else on the platform.</p>
+                    <div class="tools-used">
+                        <span class="badge">Luau</span>
+                        <span class="badge">Trigonometry</span>
+                        <span class="badge">Roblox Physics</span>
+                        <span class="badge">Dynamic Tables</span>
+                        <span class="badge">Shader Techniques</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

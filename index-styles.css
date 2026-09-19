@@ -1,0 +1,156 @@
+:root {
+    --primary-red: #870303;
+    --glow-red: #A00303;
+    --intense-glow: #CD0404;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #050505;
+    color: #ffffff;
+    /* Combine linear gradient for readability with the user's specific background image */
+    background-image: 
+        linear-gradient(to bottom, rgba(5,5,5,0.9) 0%, rgba(10,5,15,0.4) 40%, rgba(10,5,15,0.4) 60%, rgba(5,5,5,0.95) 100%),
+        url('MediaFolder\\NenEchoesThumbnailUpscaled.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+.font-cinzel {
+    font-family: 'Cinzel', serif;
+}
+
+/* Glowing Text Effects */
+.text-glow {
+    text-shadow: 0 0 10px var(--glow-red), 0 0 20px var(--glow-red);
+}
+
+.text-glow-intense {
+    text-shadow: 0 0 15px var(--glow-red), 0 0 30px var(--intense-glow), 0 0 45px rgba(168, 33, 33, 0.6);
+}
+
+/* Glowing Box/Button Effects */
+.box-glow {
+    box-shadow: 0 0 15px var(--glow-red);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.box-glow:hover {
+    box-shadow: 0 0 25px var(--intense-glow), 0 0 40px var(--primary-red);
+    transform: translateY(-2px);
+}
+
+/* 2. Cinematic Fade & Slide Up */
+@keyframes fade-in-up {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+    animation: fade-in-up 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0; /* Keeps it hidden before animation starts */
+}
+
+@keyframes fade-in-down {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-down {
+    animation: fade-in-down 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0; /* Keeps it hidden before animation starts */
+}
+
+/* Delay utility classes for staggering elements */
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+.delay-4 { animation-delay: 0.8s; }
+
+/* 3. Cinematic Tracking In (Text expands outwards) */
+@keyframes tracking-in {
+    0% { letter-spacing: -0.15em; opacity: 0; }
+    40% { opacity: 0.6; }
+    100% { letter-spacing: normal; opacity: 1; }
+}
+
+.animate-tracking-in {
+    animation: tracking-in 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
+}
+
+/* 4. Text Flicker (Edgy broken-neon effect) */
+@keyframes flicker {
+    0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% { opacity: 1; }
+    20%, 21.999%, 63%, 63.999%, 65%, 69.999% { opacity: 0.4; }
+}
+
+.animate-flicker {
+    animation: flicker 4s linear infinite;
+}
+
+/* Subtle idle animation for the main title */
+@keyframes pulse-glow {
+    0%, 100% { text-shadow: 0 0 15px var(--glow-red), 0 0 30px var(--intense-glow); }
+    50% { text-shadow: 0 0 20px var(--intense-glow), 0 0 40px #fc8484, 0 0 60px rgba(168, 33, 33, 0.8); }
+}
+
+.animate-glow {
+    animation: pulse-glow 4s infinite alternate;
+}
+
+.animate-title-intro {
+    /* 
+      1st: tracking-in (duration 1.2s, delay 1s, 'both' keeps it invisible before it starts)
+      2nd: pulse-glow (duration 4s, delay 2.2s to wait for the intro to finish, infinite)
+    */
+    animation: 
+        pulse-glow 4s 0s infinite alternate,
+        tracking-in 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
+}
+
+/* Scroll line animation */
+@keyframes scroll-down {
+    0% { transform: translateY(-100%); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(100%); opacity: 0; }
+}
+
+.scroll-line-container {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-line-container:hover {
+    opacity: 1;
+}
+
+.scroll-line {
+    width: 1px;
+    height: 40px;
+    background: rgba(255,255,255,0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #fff;
+    animation: scroll-down 2s infinite ease-in-out;
+}
