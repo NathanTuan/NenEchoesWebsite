@@ -12,7 +12,7 @@
 }
 
 body {
-    background-color: #050505; /* Deep dark background */
+    background-color: #050505;
     color: #ffffff;
     background-image: 
         linear-gradient(to bottom, rgba(5,5,5,0.9) 0%, rgba(10,5,15,0.4) 40%, rgba(10,5,15,0.4) 60%, rgba(5,5,5,0.95) 100%),
@@ -32,7 +32,6 @@ body {
     font-family: 'Cinzel', serif;
 }
 
-/* Glowing Utilities (used by the new header) */
 .text-glow {
     text-shadow: 0 0 10px var(--glow-red), 0 0 20px var(--glow-red);
 }
@@ -47,7 +46,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* Features Section */
 .features-section {
     padding: 5rem 5%;
     max-width: 1400px;
@@ -69,6 +67,7 @@ body {
     opacity: 0.8;
 }
 
+/* Text glow matching */
 .title {
     font-size: 3.5rem;
     font-weight: 700;
@@ -83,6 +82,12 @@ body {
     50% { text-shadow: 0 0 20px var(--intense-glow), 0 0 40px #fc8484, 0 0 60px rgba(168, 33, 33, 0.8); }
 }
 
+/* Box glow matching for timeline lines/nodes */
+@keyframes pulse-box-glow {
+    0%, 100% { box-shadow: 0 0 15px var(--glow-red), 0 0 30px var(--intense-glow); }
+    50% { box-shadow: 0 0 20px var(--intense-glow), 0 0 40px #fc8484, 0 0 60px rgba(168, 33, 33, 0.8); }
+}
+
 .description {
     color: #d1d5db;
     font-size: 1rem;
@@ -92,14 +97,6 @@ body {
     opacity: 0.9;
 }
 
-/* Cards Grid */
-.cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2.5rem;
-}
-
-/* Feature Card */
 .feature-card {
     background: rgba(15, 5, 5, 0.6);
     border: 1px solid rgba(135, 3, 3, 0.3);
@@ -107,15 +104,116 @@ body {
     overflow: hidden;
     transition: all 0.4s ease;
     backdrop-filter: blur(5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .feature-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
     border-color: var(--glow-red);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(160, 3, 3, 0.4);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(160, 3, 3, 0.3);
 }
 
-/* Video Wrapper */
+.hero-card-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.hero-card {
+    width: 100%;
+    max-width: 1000px; 
+}
+
+/* TIMELINE CONTAINER SETUP */
+.timeline-container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    --scroll-progress: 0%; /* Adjusted dynamically by JS */
+}
+
+/* 1. Base Dull Line (Inactive track) */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    background: rgba(249, 249, 249, 0.15); /* Dim red */
+    z-index: 0;
+}
+
+/* 2. Bright Glowing Line (Active track filled by scrolling) */
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: var(--scroll-progress); /* Filled dynamically */
+    background: white;
+    z-index: 1;
+    animation: pulse-box-glow 4s infinite alternate; /* Same pulsing effect as text */
+    transition: height 0.15s ease-out; /* Smooth fill */
+}
+
+.timeline-item {
+    position: relative;
+    z-index: 2; /* Sits above the lines */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Base Inactive Marker (Dull) */
+.timeline-marker {
+    position: absolute;
+    top: -1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 4px solid rgba(0, 0, 0, 0.4); 
+    box-shadow: none;
+    z-index: 3;
+    transition: all 0.5s ease;
+}
+
+/* Activated Marker (Bright + Pulsing when scrolled onto) */
+.timeline-item.active .timeline-marker {
+    border-color: var(--intense-glow);
+    animation: pulse-box-glow 4s infinite alternate;
+}
+
+/* Optional: Slight pop in to the card itself when activated */
+.timeline-item .timeline-card {
+    opacity: 0.5;
+    filter: grayscale(80%);
+    transform: scale(0.97);
+    transition: all 0.7s ease;
+}
+.timeline-item.active .timeline-card {
+    opacity: 1;
+    filter: grayscale(0%);
+    transform: scale(1);
+}
+
+.timeline-card {
+    width: 100%;
+    max-width: 750px;
+    margin-top: 2rem;
+}
+
 .video-wrapper {
     width: 100%;
     aspect-ratio: 16/9;
@@ -144,13 +242,13 @@ body {
     z-index: 1;
 }
 
-/* Card Info */
 .card-info {
-    padding: 2rem;
+    padding: 2.5rem 2rem;
+    text-align: center;
 }
 
 .card-info h2 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     margin-bottom: 1rem;
     color: #ffffff;
     letter-spacing: 1px;
@@ -158,17 +256,23 @@ body {
 
 .card-info p {
     color: #9ca3af;
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 1.5rem;
     font-weight: 300;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Tools Badges */
 .tools-used {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
+}
+
+.justify-center {
+    justify-content: center;
 }
 
 .badge {
@@ -185,32 +289,32 @@ body {
 
 /* Responsive Overrides */
 @media (max-width: 768px) {
-    .title { font-size: 2.5rem; }
+    .title { font-size: 2.5rem !important; }
     .features-section { padding: 3rem 5%; }
+    .card-info { padding: 1.5rem; }
+    .timeline-card { max-width: 100%; }
+    .timeline-container::before, .timeline-container::after {
+        left: 50%;
+    }
 }
 
-
-/* 2. Cinematic Fade & Slide Up */
+/* Cinematic Fade Animations */
 @keyframes fade-in-up {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes fade-in-down {
     0% { opacity: 0; transform: translateY(-20px); }
     100% { opacity: 1; transform: translateY(0); }
 }
-
 .animate-fade-up {
     animation: fade-in-up 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    opacity: 0; /* Keeps it hidden before animation starts */
+    opacity: 0; 
 }
-
 .animate-fade-down {
     animation: fade-in-down 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    opacity: 0; /* Keeps it hidden before animation starts */
+    opacity: 0; 
 }
-/* Delay utility classes for staggering elements */
 .delay-1 { animation-delay: 0.2s; }
 .delay-2 { animation-delay: 0.4s; }
 .delay-3 { animation-delay: 0.6s; }
